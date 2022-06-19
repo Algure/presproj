@@ -35,6 +35,9 @@ class MainActivity: FlutterActivity() {
             }else if (call.method == "startNoteService" ) {
 
                 startNotifierService()
+            } else if (call.method == "startNotesActivity" ) {
+
+                startNotesActivity()
             } else {
                 result.notImplemented()
             }
@@ -46,6 +49,12 @@ class MainActivity: FlutterActivity() {
         NotifierService.setCurrentMusic(0)
         var i = Intent(this, NotifierService::class.java)
         startService(i)
+    }
+
+
+    private fun startNotesActivity(){
+        var i = Intent(this, DataActivity::class.java)
+        startActivity(i)
     }
 
 
