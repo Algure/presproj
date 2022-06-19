@@ -13,6 +13,8 @@ import android.os.BatteryManager
 import android.os.Build.VERSION
 import android.os.Build.VERSION_CODES
 
+import com.algure.presproj.services.NotifierService
+
 
 class MainActivity: FlutterActivity() {
     private val CHANNEL = "samples.flutter.dev/battery"
@@ -21,7 +23,6 @@ class MainActivity: FlutterActivity() {
         super.configureFlutterEngine(flutterEngine)
 
         MethodChannel(flutterEngine.dartExecutor.binaryMessenger, CHANNEL).setMethodCallHandler {
-            // This method is invoked on the main thread.
                 call, result ->
             if (call.method == "getBatteryLevel") {
                 val batteryLevel = getBatteryLevel()
@@ -31,10 +32,20 @@ class MainActivity: FlutterActivity() {
                 } else {
                     result.error("UNAVAILABLE", "Battery level not available.", null)
                 }
+            }else if (call.method == "startNoteService" ) {
+
+                startNotifierService()
             } else {
                 result.notImplemented()
             }
         }
+    }
+
+
+    private fun startNotifierService(){
+        NotifierService.setCurrentMusic(0)
+        var i = Intent(this, NotifierService::class.java)
+        startService(i)
     }
 
 
@@ -49,6 +60,5 @@ class MainActivity: FlutterActivity() {
         }
         return batteryLevel
     }
-
 
 }

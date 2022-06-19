@@ -43,6 +43,11 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
 
+  _startNoteService(){
+    platform.invokeMethod('startNoteService');
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -53,6 +58,10 @@ class _MyHomePageState extends State<MyHomePage> {
             ElevatedButton(
               child: const Text('Get Battery Level'),
               onPressed: _getBatteryLevel,
+            ),
+            ElevatedButton(
+              child: const Text('Start Note Service'),
+              onPressed: _startNoteService,
             ),
             Text(_batteryLevel),
           ],

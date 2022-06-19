@@ -30,5 +30,8 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
-    </application>
+
+       <service android:name=".services.NotifierService"/>
+
+   </application>
 </manifest>
