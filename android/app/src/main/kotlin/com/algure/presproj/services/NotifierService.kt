@@ -131,13 +131,10 @@ class NoteCountRunnable(musicData: MusicData, context:Context,  doWhenDone:()-> 
 
         var totalSecs = 0
 
-        while(totalSecs < musicData.lengthInSec){
-            makeNShowNotificationWithDets(notificationBuiler, totalSecs)
-            Thread.sleep(1000)
-            if (DataProvider.musicTestData[NotifierService.getCurrentMusic()] != musicData){
-               return
-            }
-            totalSecs ++
+        makeNShowNotificationWithDets(notificationBuiler, totalSecs)
+        Thread.sleep((1000 *  musicData.lengthInSec).toLong())
+        if (DataProvider.musicTestData[NotifierService.getCurrentMusic()] != musicData){
+            return
         }
         doWhenDone.invoke()
     }
